@@ -9,9 +9,9 @@ const Navbar = () => {
        
  <div className="space-x-6 gap-2">
     <a href="/">Home</a>
-    <a href="/about">About</a>
+    <a href="/about">How its works</a>
     <a href="/pricing">Pricing</a>
-    <a href='/feature'>Features</a>
+    <a href="#feature">Features</a>
     <a href="/contact">Contact</a>
   </div>
         <div className='space-x-4'>
