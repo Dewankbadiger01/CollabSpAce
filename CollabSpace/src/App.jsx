@@ -1,10 +1,10 @@
 import React from 'react'
-import Landing from './Compoment/Landing pages/Landing'
+import Dashboard from './Compoment/Dashboard/Dashboard'
 
 const App = () => {
   return (
     <div>
-      <Landing/>
+      <Dashboard/>
     </div>
   )
 }
