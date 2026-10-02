@@ -1,17 +1,26 @@
-import React from "react";
 import Sidebar from "./Siderbar";
 import Recentsproject from "./Recentsproject";
+import React, { useState } from "react";
+import CreateWorkspaceModal from "./CreateWorkspaceModal";
 
 const Dashboard = () => {
+  const [showWorkspaceModal, setShowWorkspaceModal] = useState(false);
+  const [workspaces, setWorkspaces] = useState(() => { return JSON.parse(localStorage.getItem("project")) || []; });
+  const handleCreateWorkspace = (workspace) => {
+    setWorkspaces((prev) => [...prev, workspace]);
+  };
+  
+
   return (
     <div className="flex min-h-screen bg-gray-100">
-      
+
       {/* Sidebar */}
       <Sidebar />
+
       <main className="flex-1 p-10">
 
         <div className="mb-8">
-          <h1 className="text-4xl font-sans ">
+          <h1 className="text-4xl font-sans">
             Welcome back, Dewank!!
           </h1>
 
@@ -19,9 +28,9 @@ const Dashboard = () => {
             Here's what's happening with your workspaces.
           </p>
         </div>
+
         <div className="grid grid-cols-2 gap-6 max-w-3xl">
 
-          {/* Workspace Card */}
           <div className="rounded-2xl bg-white p-6 shadow-sm border border-gray-200">
             <p className="text-sm text-gray-500">
               Active Workspaces
@@ -35,6 +44,8 @@ const Dashboard = () => {
               +2 this month
             </p>
           </div>
+
+          {/* Team Members Card */}
           <div className="rounded-2xl bg-white p-6 shadow-sm border border-gray-200">
             <p className="text-sm text-gray-500">
               Team Members
@@ -47,11 +58,23 @@ const Dashboard = () => {
             <p className="mt-2 text-sm text-blue-600">
               5 active now
             </p>
-            
           </div>
 
         </div>
-<Recentsproject/>
+
+        <Recentsproject
+          onCreateWorkspace={() => setShowWorkspaceModal(true)}
+          recentproject={workspaces}
+        />
+
+        {/* Create Workspace Modal */}
+      {showWorkspaceModal && (
+  <CreateWorkspaceModal
+    onClose={() => setShowWorkspaceModal(false)}
+    onCreate={handleCreateWorkspace}
+  />
+)}
+
       </main>
     </div>
   );
